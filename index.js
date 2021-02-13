@@ -1,6 +1,23 @@
 const inquirer = require('inquirer');
 
-const promptUser = () => {
+const writeFile = require('./utils/generate-readme');
+
+const generateReadMe = require('./src/readme-template');
+
+const mockData = {
+    title: 'Isabelle is King',
+    description: 'I rule the world now',
+    installation: 'Sitting on a throne',
+    usage: 'For good',
+    license: 'licenseC',
+    contribution: '10 mil per subject',
+    tests: 'do not test me',
+    github: 'janehub',
+    email: '123@gmail.com'
+};
+
+
+const promptReadMe = () => {
     return inquirer
         .prompt([
             {
@@ -34,7 +51,7 @@ const promptUser = () => {
                 message: 'Enter usage information for your project:'
             },
             {
-                type: 'checkbox',
+                type: 'list',
                 name: 'license',
                 message: 'Select a license for your project:',
                 choices: ['licenseA', 'licenseB', 'licenseC']
@@ -60,4 +77,12 @@ const promptUser = () => {
                 message: 'Enter your email address:'
             }
         ]);
+
 };
+
+promptReadMe()
+    .then(readMeData => {
+        return generateReadMe(readMeData);
+    })
+    .then(readMe => writeFile(readMe))
+    .catch(err => console.log(err));
