@@ -6,6 +6,24 @@ const renderLicenseBadge = license => {
     `
 };
 
+const renderLicenseInfo = license => {
+    if (license === 'GNU GPLv3') {
+        return `
+This license makes the complete source code available, however contributors cannot distribute closed source versions.
+        `;
+    }
+    else if (license === 'MIT License') {
+        return `
+This license allows contributors to make and distribute closed source versions of your project.
+        `;
+    }
+    else {
+        return `
+This is a license with no conditions, and dedicates your work to the public domain.
+        `;
+    }
+};
+
 const generateMarkdown = readMeData => {
     const { title, description, installation, usage, license, contribution, tests, github, email } = readMeData;
     return `
@@ -25,13 +43,15 @@ ${description}
 * [Questions](#questions)
 
 ## Installation
-${installation}
+    ${installation}
 
 ## Usage
 ${usage}
 
 ## License
 This project is covered under the ${license} license.
+
+${renderLicenseInfo(license)}
 
 ---
 
@@ -42,12 +62,12 @@ ${contribution}
 ${tests}
 
 ## Questions
-For more information checkout my github at ${github}, or if you have additional questions you can reach me at ${email}.
+For more projects like this checkout my github at [${github}](https://github.com/${github}).
+If you have additional questions about this or any other project you can reach me directly at ${email}.
     `;
 };
 
 module.exports = templateData => {
-    console.log(templateData);
     return `
         ${generateMarkdown(templateData)}
    `;

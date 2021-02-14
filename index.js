@@ -4,18 +4,6 @@ const writeFile = require('./utils/writeMarkdown');
 
 const generateMarkdown = require('./src/generateMarkdown');
 
-const mockData = {
-    title: 'Isabelle is King',
-    description: 'I rule the world now',
-    installation: 'Sitting on a throne',
-    usage: 'For good',
-    license: 'licenseC',
-    contribution: '10 mil per subject',
-    tests: 'do not test me',
-    github: 'janehub',
-    email: '123@gmail.com'
-};
-
 
 const promptReadMe = () => {
     return inquirer
@@ -74,10 +62,18 @@ const promptReadMe = () => {
             {
                 type: 'input',
                 name: 'email',
-                message: 'Enter your email address:'
+                message: 'Enter your email address:',
+                validate: emailInput => {
+                    if (emailInput.includes('@')) {
+                        return true;
+                    }
+                    else {
+                        console.log('Please enter a valid email address.');
+                        return false;
+                    }
+                }
             }
         ]);
-
 };
 
 promptReadMe()
@@ -85,4 +81,5 @@ promptReadMe()
         return generateMarkdown(readMeData);
     })
     .then(readMe => writeFile(readMe))
+    .then(writeFileResponse => console.log(writeFileResponse.message))
     .catch(err => console.log(err));
