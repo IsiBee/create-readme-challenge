@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 
-const writeFile = require('./utils/generate-readme');
+const writeFile = require('./utils/writeMarkdown');
 
-const generateReadMe = require('./src/readme-template');
+const generateMarkdown = require('./src/generateMarkdown');
 
 const mockData = {
     title: 'Isabelle is King',
@@ -54,7 +54,7 @@ const promptReadMe = () => {
                 type: 'list',
                 name: 'license',
                 message: 'Select a license for your project:',
-                choices: ['licenseA', 'licenseB', 'licenseC']
+                choices: ['GNU GPLv3', 'MIT License', 'The Unlicense']
             },
             {
                 type: 'input',
@@ -82,7 +82,7 @@ const promptReadMe = () => {
 
 promptReadMe()
     .then(readMeData => {
-        return generateReadMe(readMeData);
+        return generateMarkdown(readMeData);
     })
     .then(readMe => writeFile(readMe))
     .catch(err => console.log(err));
