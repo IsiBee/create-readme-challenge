@@ -22,13 +22,13 @@ This project challenged us to create a professional README file from the command
 
 ## Usage
 In order to use this app you must have node.js installed on your machine. Then from the command line type 
+
     node index.js
-Please watch this video if you have other questions about how this app is used.
-<figure class="video_container">
-  <video controls="false" allowfullscreen="true" poster="">
-    <source src="./utils/Module9WalkThroughVideo.webm" type="video/webm">
-  </video>
-</figure>
+
+Click the link to watch a walkthrough video if you have other questions about how this app is used.
+
+[Walkthrough Video](./utils/Module9WalkThroughVideo.webm)
+
 
 ## License
 This project is covered under the The Unlicense license.
